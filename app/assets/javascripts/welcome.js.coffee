@@ -40,6 +40,7 @@ class Welcome.Controller
     @dispatcher.bind 'user_list', @updateUserList
     $('input#user_name').on 'keyup', @updateUserInfo
     $('#send').on 'click', @sendMessage
+    $('#test').on 'click', @sendMessageTest
     $('#message').keypress (e) -> $('#send').click() if e.keyCode == 13
 
   newMessage: (message) =>
@@ -52,6 +53,12 @@ class Welcome.Controller
     message = $('#message').val()
     @dispatcher.trigger 'new_message', {user_name: @user.user_name, msg_body: message}
     $('#message').val('')
+    
+  sendMessageTest: (event) =>
+    event.preventDefault()
+    message = $('#message2').val()
+    @dispatcher.trigger 'new_message', {user_name: @user.user_name, msg_body: "9"}
+    $('#message2').val('')
 
   updateUserList: (userList) =>
     $('#user-list').html @userListTemplate(userList)
