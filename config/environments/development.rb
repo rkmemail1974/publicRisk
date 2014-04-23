@@ -26,4 +26,10 @@ Risk::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  require 'pusher'
+
+  Pusher.app_id = '72745'
+    Pusher.key    = 'e4cf2399c571ef4a7352'
+    Pusher.secret = 'fb6c0be417b809658c5c'
 end
