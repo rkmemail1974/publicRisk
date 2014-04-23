@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
-  def hello_world
-    Pusher['test_channel'].trigger('my_event', {
-      message: 'hello world'
-    })
+  def hello
+  Pusher['test_channel'].trigger('greet', {
+    :greeting => "Hello there!"
+  })
   end
 end

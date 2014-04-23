@@ -29,7 +29,7 @@ Risk::Application.configure do
 
   require 'pusher'
 
-  Pusher.app_id = '72745'
-    Pusher.key    = 'e4cf2399c571ef4a7352'
-    Pusher.secret = 'fb6c0be417b809658c5c'
+Pusher.app_id = '72746'
+  Pusher.key    = '249adada598842cd452d'
+  Pusher.secret = 'c2c280762de8c43b2f5f'
 end
