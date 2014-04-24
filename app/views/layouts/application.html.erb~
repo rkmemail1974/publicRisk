@@ -31,7 +31,7 @@
           $('div#status').text('Status: Pusher subscription_error');
         });
 	channel.bind('new_message', function(data) {
-	  $('div#message').text('Message: From: ' + data.from + ', Subject: ' + data.subject);
+	  $('div#message').text('From: ' + data.from + ', Subject: ' + data.subject);
 	});
       });
     </script>
