@@ -1,11 +1,12 @@
 Risk::Application.routes.draw do
+  get "risk/index"
   get "welcome/hello"
   post 'pusher/auth'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'welcome#index'
+   root 'risk#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
