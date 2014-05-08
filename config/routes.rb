@@ -1,4 +1,10 @@
 Risk::Application.routes.draw do
+  resources :territories
+
+  resources :players
+
+  resources :games
+
   get "risk/index"
   get "welcome/hello"
   post 'pusher/auth'
