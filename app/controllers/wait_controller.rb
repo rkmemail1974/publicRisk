@@ -1,4 +1,5 @@
-class WaitController < ApplicationController
+class WaitController < ApplicationController  
+    
     def index
         Pusher['presence-test-channel'].trigger('new_message', {:from => "test name", :subject => "test subject"})
     end
