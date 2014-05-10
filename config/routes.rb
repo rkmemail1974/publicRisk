@@ -13,6 +13,7 @@ Risk::Application.routes.draw do
    root 'wait#index'
 
     get "/wait/binding", to: "wait#binding"
+    get "/wait/count", to: "wait#count"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

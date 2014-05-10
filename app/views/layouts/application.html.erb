@@ -18,6 +18,7 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
   <script src="http://js.pusher.com/2.2/pusher.min.js"></script>
   <script type="text/javascript" charset="utf-8">
+  var count = 0;
       $(function() {
         // If your Heroku application is within the EU region,
         // uncomment the following lines
@@ -26,7 +27,7 @@
 
         var pusher = new Pusher('249adada598842cd452d'); // Replace with your app key
         var channel = pusher.subscribe('presence-test-channel');
-
+        
         // Some useful debug msgs
         pusher.connection.bind('connecting', function() {
           $('div#status').text('Status: Connecting to Pusher...');
@@ -46,7 +47,19 @@
     channel.bind('binding', function(data) {
 	  $('div#message').text('Message: From: ' + data.from + ', Subject: ' + data.subject);
 	});
+    channel.bind('newPlayer', function(data) {
+	  alert("A new player has entered the game!");
+	});
     
+    channel.bind('count', function(data) {
+            count++;
+            $('div#message').text('Number of players: ' + (count+1));    	  
+	});
+    
+    channel.bind('pusher:subscription_succeeded', function(members) {
+  // for example
+  update_member_count(members.count);
+  });
       });
     </script>
     
@@ -55,6 +68,7 @@ document.getElementById("send").onclick = send;
 function send() {
 $.get('wait/binding', function(data){});
 }
+
 
 </script>
 </html>
