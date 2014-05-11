@@ -1,23 +1,17 @@
 
         <style type="text/css">
-            .wait {
+            #wait {
                 color:blue;
                 font-size: 15pt;
                 height: 2em;
-                margin-top: 25px;                }
-            #players {
-                color:green;
-                font-size: 15pt;
-                height: 2em;
-                margin-top: 25px;
+                margin-top: 25px;                
                 }
+            
         </style>
         
-        <div class="wait">
+        <div id="wait">
         Game Begin! <br />
         </div>
-         <p id="p1">This is before text</p>
-        <div id="count"></div>
         <button id="binding">Bind</button>
         <button id="send">Send</button>
         
@@ -27,13 +21,9 @@
   <script type="text/javascript" charset="utf-8">
   var count = 0;
       $(function() {
-        // If your Heroku application is within the EU region,
-        // uncomment the following lines
-        // Pusher.host = 'ws-eu.pusher.com';
-        // Pusher.sockjs_host = 'sockjs-eu.pusher.com';
-
+    
         var pusher = new Pusher('249adada598842cd452d'); // Replace with your app key
-        var channel = pusher.subscribe("presence-newChannel", { authEndpoint: '/pusher_auth.php' });
+        var channel = pusher.subscribe("new-channel");
 
         // Some useful debug msgs
         pusher.connection.bind('connecting', function() {
@@ -55,7 +45,7 @@
 	  $('div#message').text('Message: From: ' + data.from + ', Subject: ' + data.subject);
 	});
     channel.bind('newPlayer', function(data) {
-	  alert(You are in New Game!");
+	  alert("You are in New Game!");
 	});
     
     channel.bind('count', function(data) {
@@ -69,13 +59,8 @@
     
     channel.bind('newGame', function(data) {
         pusher.unsubscribe(channel);
-        $.get('maingame/index', function(data){});
       });
-      
-      channel.bind('success', function(data) {
-      alert("New channel made successfully!");
-      });
-              
+        
       });
     </script>
     
@@ -84,6 +69,4 @@ document.getElementById("send").onclick = send;
 function send() {
 $.get('maingame/binding', function(data){});
 }
-
-
 </script>

@@ -1,11 +1,13 @@
 class MaingameController < ApplicationController
-
     def index
-        $channel = "presence-newChannel"
+        
+         Pusher['new-channel'].trigger('count', {:from => "new name", :subject => "new subject"})
+        
+        Pusher['new-channel'].trigger('newPlayer', {:from => "new name", :subject => "new subject"})
     end
     
     def binding
-        Pusher[$channel].trigger('binding', {:from => "new name", :subject => "new subject"})
+        Pusher['new-channel'].trigger('binding', {:from => "new name", :subject => "new subject"})
     end
     
 end

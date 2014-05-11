@@ -6,6 +6,13 @@
                 height: 2em;
                 margin-top: 25px;
                     }
+                    
+            a {
+            margin-top: 25px;
+            font-size: 15pt;
+            height: 2em;
+            color: red;
+            }
         </style>
         
         <div id="wait">
@@ -22,13 +29,10 @@
   <script type="text/javascript" charset="utf-8">
   var count = 0;
       $(function() {
-        // If your Heroku application is within the EU region,
-        // uncomment the following lines
-        // Pusher.host = 'ws-eu.pusher.com';
-        // Pusher.sockjs_host = 'sockjs-eu.pusher.com';
+
 
         var pusher = new Pusher('249adada598842cd452d'); // Replace with your app key
-        var channel = pusher.subscribe('presence-test-channel');
+        var channel = pusher.subscribe('test-channel');
 
         // Some useful debug msgs
         pusher.connection.bind('connecting', function() {
