@@ -13,8 +13,11 @@ Risk::Application.routes.draw do
    root 'wait#index'
 
     get "/wait/binding", to: "wait#binding"
-    get "/wait/count", to: "wait#count"
-  # Example of regular route:
+    get "/wait/newgame", to: "wait#newgame"
+    get "/maingame/index", to: "maingame#index"
+    get "/maingame/binding", to: "maingame#binding"
+
+    # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

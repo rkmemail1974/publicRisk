@@ -1,20 +1,25 @@
 
         <style type="text/css">
-            #wait {
+            .wait {
                 color:blue;
                 font-size: 15pt;
                 height: 2em;
+                margin-top: 25px;                }
+            #players {
+                color:green;
+                font-size: 15pt;
+                height: 2em;
                 margin-top: 25px;
-                    }
+                }
         </style>
         
-        <div id="wait">
-        Risk Waiting Area <br />
-        Please wait until 3 players have joined to start <br />
-        a game! <br />
+        <div class="wait">
+        Game Begin! <br />
         </div>
-        
-        <a href="/maingame/index">Press to Start Game</a>
+         <p id="p1">This is before text</p>
+        <div id="count"></div>
+        <button id="binding">Bind</button>
+        <button id="send">Send</button>
         
         <%= csrf_meta_tags %>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
@@ -28,7 +33,7 @@
         // Pusher.sockjs_host = 'sockjs-eu.pusher.com';
 
         var pusher = new Pusher('249adada598842cd452d'); // Replace with your app key
-        var channel = pusher.subscribe('presence-test-channel');
+        var channel = pusher.subscribe("presence-newChannel", { authEndpoint: '/pusher_auth.php' });
 
         // Some useful debug msgs
         pusher.connection.bind('connecting', function() {
@@ -50,21 +55,21 @@
 	  $('div#message').text('Message: From: ' + data.from + ', Subject: ' + data.subject);
 	});
     channel.bind('newPlayer', function(data) {
-	  alert("A new player has entered the game!");
+	  alert(You are in New Game!");
 	});
     
     channel.bind('count', function(data) {
             count++;
-            if (count ==2)
+            if (count > 9)
             {
-                $.get('wait/newgame', function(data){});                
+                $.get('maingame/newgame', function(data){});
             }
             $('div#message').text('Number of players: ' + (count+1));    	  
 	});
     
-    channel.bind('newgame', function(data) {
-        alert("Press Start Game");
+    channel.bind('newGame', function(data) {
         pusher.unsubscribe(channel);
+        $.get('maingame/index', function(data){});
       });
       
       channel.bind('success', function(data) {
@@ -74,3 +79,11 @@
       });
     </script>
     
+<script>
+document.getElementById("send").onclick = send;
+function send() {
+$.get('maingame/binding', function(data){});
+}
+
+
+</script>

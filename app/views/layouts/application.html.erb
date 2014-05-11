@@ -9,66 +9,8 @@
 <body>
 <div id="status">Status: </div>
 <div id="message">Message: </div>
-<button id="send">Send</button>
 <%= image_tag "1000px-Risk_game_map_fixed.png" %>
 <%= yield %>
 
 </body>
-  <%= csrf_meta_tags %>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-  <script src="http://js.pusher.com/2.2/pusher.min.js"></script>
-  <script type="text/javascript" charset="utf-8">
-  var count = 0;
-      $(function() {
-        // If your Heroku application is within the EU region,
-        // uncomment the following lines
-        // Pusher.host = 'ws-eu.pusher.com';
-        // Pusher.sockjs_host = 'sockjs-eu.pusher.com';
-
-        var pusher = new Pusher('249adada598842cd452d'); // Replace with your app key
-        var channel = pusher.subscribe('presence-test-channel');
-        
-        // Some useful debug msgs
-        pusher.connection.bind('connecting', function() {
-          $('div#status').text('Status: Connecting to Pusher...');
-        });
-        pusher.connection.bind('connected', function() {
-          $('div#status').text('Status: Connected to Pusher!');
-        });
-        pusher.connection.bind('failed', function() {
-          $('div#status').text('Status: Connection to Pusher failed :(');
-        });
-        channel.bind('subscription_error', function(status) {
-          $('div#status').text('Status: Pusher subscription_error');
-        });
-	channel.bind('new_message', function(data) {
-	  $('div#message').text('Message: From: ' + data.from + ', Subject: ' + data.subject);
-	});
-    channel.bind('binding', function(data) {
-	  $('div#message').text('Message: From: ' + data.from + ', Subject: ' + data.subject);
-	});
-    channel.bind('newPlayer', function(data) {
-	  alert("A new player has entered the game!");
-	});
-    
-    channel.bind('count', function(data) {
-            count++;
-            $('div#message').text('Number of players: ' + (count+1));    	  
-	});
-    
-    channel.bind('pusher:subscription_succeeded', function(members) {
-  // for example
-  update_member_count(members.count);
-  });
-      });
-    </script>
-    
-<script>
-document.getElementById("send").onclick = send;
-function send() {
-$.get('wait/binding', function(data){});
-}
-
-
-</script>
-</html>
+  </html>

@@ -1,11 +1,11 @@
  class PusherController < ApplicationController
   protect_from_forgery :except => :auth # stop rails CSRF protection for this action
      
+     
   def auth
       
-      Pusher['presence-test-channel'].trigger('newPlayer', {:from => "new name", :subject => "new subject"})
+      Pusher[$channel].trigger('newPlayer', {:from => "new name", :subject => "new subject"})
       
-     
         response = Pusher[params[:channel_name]].authenticate(params[:socket_id], {
              :user_id => 12, # => required
             :user_info => {
@@ -15,6 +15,6 @@
        })
           render :json => response
       
-      Pusher['presence-test-channel'].trigger('count', {:from => "new name", :subject => "new subject"})
+      Pusher[$channel].trigger('count', {:from => "new name", :subject => "new subject"})
   end
 end
