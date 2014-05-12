@@ -1,8 +1,6 @@
 class MaingameController < ApplicationController
     def index
-        
-         Pusher['new-channel'].trigger('count', {:from => "new name", :subject => "new subject"})
-        
+
         Pusher['new-channel'].trigger('newPlayer', {:from => "new name", :subject => "new subject"})
     end
     

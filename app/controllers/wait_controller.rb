@@ -8,7 +8,6 @@ class WaitController < ApplicationController
         
         Pusher['test-channel'].trigger('newPlayer', {:from => "new name", :subject => "new subject"})
         
-
     end
     
     def binding
